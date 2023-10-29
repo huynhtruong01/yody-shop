@@ -1,15 +1,12 @@
 'use client'
 
-import { IUser } from '@/models'
-import { AppState } from '@/store'
+import { getLs } from '@/utils'
 import { usePathname, useRouter } from 'next/navigation'
 import { ReactNode, useEffect } from 'react'
-import { connect } from 'react-redux'
 
 export interface IContainerProps {
    children: ReactNode
    className?: string
-   pUser: IUser | null
 }
 
 const noLogged = ['/login', '/signup', '/verify-account']
@@ -24,27 +21,20 @@ const logged = [
    '/account/recently-viewed',
 ]
 
-function Container({ children, className = '', pUser }: IContainerProps) {
+export function Container({ children, className = '' }: IContainerProps) {
    const router = useRouter()
    const pathname = usePathname()
+   const user = getLs(process.env.NEXT_PUBLIC_ACCESS_TOKEN_KEY!)
 
    useEffect(() => {
-      if (noLogged.includes(pathname) && pUser) {
+      if (noLogged.includes(pathname!) && user) {
          router.back()
       }
 
-      if (logged.includes(pathname) && !pUser) {
+      if (logged.includes(pathname!) && !user) {
          router.push('/')
       }
    }, [pathname])
 
    return <div className={`w-[1280px] px-5 m-auto ${className}`}>{children}</div>
 }
-
-const mapStateToProps = (state: AppState) => {
-   return {
-      pUser: state.user.user,
-   }
-}
-
-export default connect(mapStateToProps, null)(Container)
