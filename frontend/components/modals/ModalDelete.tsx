@@ -99,7 +99,7 @@ function ModalDelete({
 
    return (
       <Modal isShowModal={pIsShowModal}>
-         <div className="bg-white w-[550px] px-10 py-8 rounded d-flex flex-col">
+         <div className="bg-white max-w-[550px] w-full px-10 py-8 rounded d-flex flex-col">
             <div className="w-[150px] h-[150px] relative">
                <Image
                   src={'/deleted.png'}
