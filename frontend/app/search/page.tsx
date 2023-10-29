@@ -12,7 +12,7 @@ export default function Search() {
    const searchParams = useSearchParams()
    const [products, setProducts] = useState<IProduct[]>([])
    const [loading, setLoading] = useState<boolean>(true)
-   const params = new URLSearchParams(searchParams.toString())
+   const params = new URLSearchParams(searchParams?.toString())
    const { error } = useToastify()
 
    useEffect(() => {
@@ -34,7 +34,9 @@ export default function Search() {
       <Container>
          <div>
             <h1 className="text-secondary font-semibold text-[22px] text-center">
-               <span>KẾT QUẢ TÌM KIẾM SẢN PHẨM &quot;{params.get('q') || ''}&quot;</span>
+               <span className="uppercase">
+                  Kết quả tìm kiếm sản phẩm &quot;{params.get('q') || ''}&quot;
+               </span>
             </h1>
             {products.length > 0 && !loading && (
                <ProductList products={products} className="grid-cols-5 gap-5 mt-6" />

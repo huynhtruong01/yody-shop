@@ -14,7 +14,7 @@ export default function Product() {
    const searchParams = useSearchParams()
    const router = useRouter()
    const pathname = usePathname()
-   const params = new URLSearchParams(searchParams.toString())
+   const params = new URLSearchParams(searchParams?.toString())
 
    const filters: IQueryProduct = {
       limit: 12,
@@ -22,7 +22,7 @@ export default function Product() {
    }
    const { data, isLoading } = useProductList({ params: filters })
 
-   const totalProducts = data.data.total
+   const totalProducts = data.data.total || 0
    const productList = data.data.products
 
    useEffect(() => {

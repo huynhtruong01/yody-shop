@@ -9,11 +9,11 @@ import { useRouter } from 'next/navigation'
 import { useMemo } from 'react'
 import { connect } from 'react-redux'
 
-export interface IFavoritesProductProps {
+export interface IFavoritesProductsProps {
    pUser: IUser | null
 }
 
-export function FavoritesProduct({ pUser }: IFavoritesProductProps) {
+export function FavoritesProducts({ pUser }: IFavoritesProductsProps) {
    const router = useRouter()
 
    const productList = useMemo(() => {
@@ -27,7 +27,7 @@ export function FavoritesProduct({ pUser }: IFavoritesProductProps) {
       return null
    }
 
-   const handleNavigateProduct = () => router.push('/goods')
+   const handleNavigateProduct = () => router.push('/products')
 
    return (
       <div className="h-full">
@@ -70,4 +70,4 @@ const mapStateToProps = (state: AppState) => {
    }
 }
 
-export default connect(mapStateToProps, null)(FavoritesProduct)
+export default connect(mapStateToProps, null)(FavoritesProducts)
